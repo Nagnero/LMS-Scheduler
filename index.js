@@ -100,7 +100,7 @@ const getAllReports = () => {
 
 const appendReports = (text) => {
   const newId = id_report++;
-  const newReports = getAllTodos().concat({id: newId, isCompleted: false, content: text })
+  const newReports = getAllReports().concat({id: newId, isCompleted: false, content: text })
   setReports(newReports);
   paintReport();
 }
@@ -112,7 +112,7 @@ const deleteReport = (reportId) => {
 }
 
 const completeReport = (reportId) => {
-  const newReports = getAllReports.map(report => report.id !== reportId ? {...report, isCompleted: !todo.isCompleted} : todo);
+  const newReports = getAllReports().map(report => report.id === reportId ? {...report, isCompleted: !report.isCompleted} : report);
   setReports(newReports);
   paintReport();
 }
@@ -141,7 +141,7 @@ const paintReport = () => {
     delBtnElem.innerHTML = 'X';
 
     if(report.isCompleted) {
-      reportElem.classList.add('checked');
+      reportItemElem.classList.add('checked');
       checkboxElem.innerText = '✔'
     }
 
