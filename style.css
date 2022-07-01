@@ -114,18 +114,21 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 12rem;
-  min-width: 500px;
+  width: 500px;
 }
 
-.todo-title {
+.report-box {
+  padding: 10px;
+}
+
+.todo-title, .report-title {
   padding: 10px;
   text-align: center;
   color: rosybrown;
   font-size: 2rem;
 }
 
-.todo-box {
+.todo-box, .report-box {
   background-color: white;
   border: 1px solid #ddd;
 }
