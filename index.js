@@ -83,6 +83,7 @@ const goToday = () => {
 };
 
 
+// 과제리스트
 const reportListElem = document.querySelector(".report-list");
 const reportInputElem = document.querySelector('.report-input');
 
@@ -104,6 +105,18 @@ const appendReports = (text) => {
   paintReport();
 }
 
+const deleteReport = (reportId) => {
+  const newReports = getAllReports().filter(report => report.id !== reportId);
+  setReports(newReports);
+  paintReport();
+}
+
+const completeReport = (reportId) => {
+  const newReports = getAllReports.map(todo => todo.id !== todoId ? {...report, isCompleted: !todo.isCompleted} : todo);
+  setReports(newReports);
+  paintReport();
+}
+
 const paintReport = () => {
   reportListElem.innerHTML = null;
   const allReports = getAllReports();
@@ -114,6 +127,7 @@ const paintReport = () => {
 
     const checkboxElem = document.createElement('div');
     checkboxElem.classList.add('checkbox');
+    checkboxElem.addEventListener('click', () => completeReport(report.id));
 
     const reportElem = document.createElement('div');
     reportElem.classList.add('report');
@@ -121,7 +135,8 @@ const paintReport = () => {
 
     const delBtnElem = document.createElement('button');
     delBtnElem.classList.add('delBtn');
-    delBtnElem.innerText = 'X';
+    delBtnElem.addEventListener('click', () => deleteReport(report.id))
+    delBtnElem.innerHTML = 'X';
 
     if(report.isCompleted) {
       reportElem.classList.add('checked');
@@ -145,6 +160,7 @@ const initReport = () => {
 }
 
 
+// todo
 const todoInputElem = document.querySelector('.todo-input');
 const todoListElem = document.querySelector('.todo-list');
 const completeAllBtnElem = document.querySelector('.complete-all-btn');
