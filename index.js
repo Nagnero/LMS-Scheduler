@@ -87,7 +87,7 @@ const goToday = () => {
 const reportListElem = document.querySelector(".report-list");
 const reportInputElem = document.querySelector('.report-input');
 
-let id = 0;
+let id_report = 0;
 let reports = [];
 
 const setReports = (newReports) => {
@@ -99,7 +99,7 @@ const getAllReports = () => {
 }
 
 const appendReports = (text) => {
-  const newId = id++;
+  const newId = id_report++;
   const newReports = getAllTodos().concat({id: newId, isCompleted: false, content: text })
   setReports(newReports);
   paintReport();
@@ -112,7 +112,7 @@ const deleteReport = (reportId) => {
 }
 
 const completeReport = (reportId) => {
-  const newReports = getAllReports.map(todo => todo.id !== todoId ? {...report, isCompleted: !todo.isCompleted} : todo);
+  const newReports = getAllReports.map(report => report.id !== reportId ? {...report, isCompleted: !todo.isCompleted} : todo);
   setReports(newReports);
   paintReport();
 }
@@ -124,6 +124,8 @@ const paintReport = () => {
   allReports.forEach(report => {
     const reportItemElem = document.createElement('li');
     reportItemElem.classList.add('report-item');
+
+    reportItemElem.setAttribute('data-id', report.id);
 
     const checkboxElem = document.createElement('div');
     checkboxElem.classList.add('checkbox');
@@ -170,8 +172,8 @@ const showActiveBtnElem = document.querySelector('.show-active-btn');
 const showCompletedBtnElem = document.querySelector('.show-completed-btn');
 const clearCompletedBtnElem = document.querySelector('.clear-completed-btn');
 
-
-const setId = (newId) => {id = newId};
+let id_todo = 0;
+const setId = (newId) => {id_todo = newId};
 
 let isAllCompleted = false; // 전체 todos 체크 여부
 const setIsAllCompleted = (bool) => { isAllCompleted = bool};
@@ -234,7 +236,7 @@ const onClickCompleteAll = () => {
 }
 
 const appendTodos = (text) => {
-  const newId = id + 1; // 기존에 i++ 로 작성했던 부분을 setId()를 통해 id값을 갱신하였다.
+  const newId = id_todo + 1; // 기존에 i++ 로 작성했던 부분을 setId()를 통해 id값을 갱신하였다.
   setId(newId)
   const newTodos = getAllTodos().concat({id: newId, isCompleted: false, content: text })
   // const newTodos = [...getAllTodos(), {id: newId, isCompleted: false, content: text }]
