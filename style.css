@@ -118,7 +118,7 @@ body {
 }
 
 .report-box {
-  padding: 10px;
+  padding: 20px;
 }
 
 .todo-title, .report-title {
@@ -133,7 +133,7 @@ body {
   border: 1px solid #ddd;
 }
 
-.todo-input-box {
+.todo-input-box, .report-input-box {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
@@ -165,7 +165,7 @@ button {
   color: green
 }
 
-.todo-input {
+.todo-input, .report-input {
   width: 80%;
   text-align: center;
   border: 0;
@@ -173,7 +173,7 @@ button {
   font-size: 1.3rem;
 }
 
-.todo-item {
+.todo-item, .report-item {
   position: relative;
   display: flex;
   flex-wrap: nowrap;
@@ -184,7 +184,7 @@ button {
   border-bottom: 1px solid #ddd;
 }
 
-.todo-item:hover .delBtn {
+.todo-item:hover .delBtn, .report-item:hover .delBtn {
   opacity: 1;
 }
 
@@ -200,21 +200,21 @@ button {
   text-align: center;
 }
 
-.todo-item.checked .checkbox{
+.todo-item.checked .checkbox, .report-item.checked .checkbox{
   border: 2px solid darkgray;
   color: green;
 }
 
-.todo {
-  font-size: 1.3rem;
-  padding: 0 1rem;
-  width: 80%;
-}
-
-.todo-item.checked .todo{
+.todo-item.checked .todo, .report-item.checked .report{
 font-style: italic;
 text-decoration: line-through;
 color: lightgray;
+}
+
+.todo, .report {
+  font-size: 1.3rem;
+  padding: 0 1rem;
+  width: 80%;
 }
 
 .delBtn {

@@ -83,6 +83,68 @@ const goToday = () => {
 };
 
 
+const reportListElem = document.querySelector(".report-list");
+const reportInputElem = document.querySelector('.report-input');
+
+let id = 0;
+let reports = [];
+
+const setReports = (newReports) => {
+  reports = newReports;
+}
+
+const getAllReports = () => {
+  return reports;
+}
+
+const appendReports = (text) => {
+  const newId = id++;
+  const newReports = getAllTodos().concat({id: newId, isCompleted: false, content: text })
+  setReports(newReports);
+  paintReport();
+}
+
+const paintReport = () => {
+  reportListElem.innerHTML = null;
+  const allReports = getAllReports();
+
+  allReports.forEach(report => {
+    const reportItemElem = document.createElement('li');
+    reportItemElem.classList.add('report-item');
+
+    const checkboxElem = document.createElement('div');
+    checkboxElem.classList.add('checkbox');
+
+    const reportElem = document.createElement('div');
+    reportElem.classList.add('report');
+    reportElem.innerText = report.content;
+
+    const delBtnElem = document.createElement('button');
+    delBtnElem.classList.add('delBtn');
+    delBtnElem.innerText = 'X';
+
+    if(report.isCompleted) {
+      reportElem.classList.add('checked');
+      checkboxElem.innerText = '✔'
+    }
+
+    reportItemElem.appendChild(checkboxElem);
+    reportItemElem.appendChild(reportElem);
+    reportItemElem.appendChild(delBtnElem);
+
+    reportListElem.appendChild(reportItemElem);
+  })
+}
+
+const initReport = () => {
+  reportInputElem.addEventListener('keypress', (e) =>{
+    if( e.key === 'Enter' ){
+      appendReports(e.target.value); reportInputElem.value='';
+    }
+  });
+}
+
+
 const todoInputElem = document.querySelector('.todo-input');
 const todoListElem = document.querySelector('.todo-list');
 const completeAllBtnElem = document.querySelector('.complete-all-btn');
@@ -93,7 +155,6 @@ const showCompletedBtnElem = document.querySelector('.show-completed-btn');
 const clearCompletedBtnElem = document.querySelector('.clear-completed-btn');
 
 
-let id = 0;
 const setId = (newId) => {id = newId};
 
 let isAllCompleted = false; // 전체 todos 체크 여부
@@ -286,12 +347,13 @@ const paintTodo = (todo) => {
     paintTodos();
 }
 
-const init = () => {
-    todoInputElem.addEventListener('keypress', (e) =>{
-        if( e.key === 'Enter' ){
-            appendTodos(e.target.value); todoInputElem.value ='';
-        }
-    })
+const initTodo = () => {
+  todoInputElem.addEventListener('keypress', (e) =>{
+    if( e.key === 'Enter' ){
+        appendTodos(e.target.value); todoInputElem.value ='';
+    }
+  });
+
     completeAllBtnElem.addEventListener('click',  onClickCompleteAll);
     showAllBtnElem.addEventListener('click', onClickShowTodosType);
     showActiveBtnElem.addEventListener('click',onClickShowTodosType);
@@ -300,4 +362,5 @@ const init = () => {
     setLeftItems()
 }
 
-init()
+initTodo();
+initReport();
