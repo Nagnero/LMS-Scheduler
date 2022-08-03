@@ -29,10 +29,15 @@ const userSignin = async () => {
 } // 유저에게 값을 받는건 O,        /////////받은 값을 DB로 보내는 방법??
 
 const userLogin = async () => {
-  const response = await fetch(`${port}/auth/login.json`, {
+  const response = await fetch('https://kseon-server.shop/auth/login', {
     method: 'POST',
-    body: id, password,
+    body: {
+      "email" : "davidyeon123@naver.com",
+      "pwd" : "sunwoo"
+    }
   })
+  const data = await response.json()
+  return data
 }
 
 
